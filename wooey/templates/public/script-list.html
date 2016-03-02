@@ -1,9 +1,16 @@
-<dl class="sub-nav script-list"> <dt>Filter:</dt>
+<!-- <dl class="sub-nav script-list"> <dt>Filter:</dt>
     <dd class="active"><a href="#">All</a></dd>
     <dd><a href="#">Active</a></dd>
-    <dd class="hide-for-small-only"><a href="#">Disabled</a></dd> </dl>
+    <dd class="hide-for-small-only"><a href="#">Disabled</a></dd> </dl> -->
+<div class="btn-group" role="group" aria-label="...">
+  <button type="button" class="btn btn-default">All</button>
+  <button type="button" class="btn btn-default">Active</button>
+  <button type="button" class="btn btn-default">Disabled</button>
+</div>
 
-<ul class="large-block-grid-3 medium-block-grid-2 small-block-grid-1">
+<hr/>
+
+<ul >
   {% for script in scripts %}
     <li class="{% if not script.is_active or not script.is_authorised %} inactive{% endif %}"><div class="script radius">
         <div class="script-icons">

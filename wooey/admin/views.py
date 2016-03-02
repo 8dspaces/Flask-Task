@@ -11,8 +11,8 @@ class AdminView(BaseView):
     def is_accessible(self):
         return current_user.is_authenticated() and current_user.is_admin
 
-class ModelView(ModelView, AdminView):
-    pass
+# class ModelView(ModelView, AdminView):
+#     pass
 
 from ..extensions import flask_admin, db
 from ..user.models import User
