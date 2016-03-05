@@ -8,44 +8,7 @@
 <head>
   <meta charset="utf-8">
   <style media="screen">
-  .bs-docs-header, .bs-docs-masthead {
-    position: relative;
-    padding: 30px 0;
-    color: #f5f5f5;
-    text-align: center;
-    text-shadow: 0 1px 0 rgba(0,0,0,.1);
-    #607D8B;
-    background-color: #607D8B; //#eee;
 
-    /*#6f5499;
-    background-image: -webkit-gradient(linear,left top,left bottom,from(#563d7c),to(#6f5499));
-    background-image: -webkit-linear-gradient(top,#563d7c 0,#6f5499 100%);
-    background-image: -o-linear-gradient(top,#563d7c 0,#6f5499 100%);
-    background-image: linear-gradient(to bottom,#563d7c 0,#6f5499 100%);*/
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#563d7c', endColorstr='#6F5499', GradientType=0);
-    background-repeat: repeat-x;
-    }
-    .bs-docs-header {
-    padding-top: 60px;
-    padding-bottom: 60px;
-    font-size: 24px;
-    text-align: left;
-    height: 240px;
-    }
-    .navbar {
-        position: relative;
-        min-height: 50px;
-        margin-bottom: 0px !important;
-        border: 1px solid transparent;
-    }
-    .bs-docs-footer {
-        padding-top: 40px;
-        padding-bottom: 40px;
-        margin-top: 100px;
-        color: #767676;
-        text-align: center;
-        border-top: 1px solid #e5e5e5;
-}
   </style>
 
   <title>{% block page_title %}{{ config.SITE_NAME }}{% endblock %}
@@ -101,19 +64,21 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button> -->
-                <a class="navbar-brand" href="{{ url_for('public.home') }}">Flask Wooey</a>
+                <a class="navbar-brand title wooey" href="{{ url_for('public.home') }}">{{ config.SITE_NAME }}</a>
             </div>
 
       <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="{{ url_for('public.about') }}">About</a></li>
+
                 <li><a href="{{ url_for('public.scripts') }}">scripts</a></li>
                 <li><a href="{{ url_for('public.queue') }}">queue</a></li>
+                <li><a href="{{ url_for('public.about') }}">About</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated() %}
                 <li><a href="{{ url_for('user.members') }}">Logged in as {{ current_user.username }}</a></li>
+                <li><a href="{{ url_for('public.logout') }}"><i class="glyphicon glyphicon-log-out"></i></a></li>
                 {% else %}
                 <form class="navbar-form navbar-left" method="POST" action="/" role="login">
                 <!--form class="navbar-form navbar-right" role="search"-->
@@ -137,9 +102,11 @@
 
 <div class="bs-docs-header" id="content" tabindex="-1">
   <div class="container">
-    <h1>{{ config.SITE_NAME }}</h1>
-    <p>{{ config.SITE_TAGLINE }}</p>
-  </div>
+    <h1 class="wooey">{{ config.SITE_NAME }}<small>--{{ config.SITE_TAGLINE }}</small></h1>
+    <!-- <span><h1 class="wooey">{{ config.SITE_NAME }}</h1><p>{{ config.SITE_TAGLINE }}</p></span> -->
+    <p>check all avaialable scripts by <a class="btn btn-lg btn-outline" href="{{ url_for('public.scripts') }}" role="button">Available Scripts...</a></p>
+
+ </div>
 </div>
 
 <ol class="breadcrumb">
@@ -204,7 +171,7 @@
 
 
 <header>{% block header %}{% endblock %}</header>
-<hr>
+
 
 <div class="{% block content_class %}row{% endblock content_class %}">
 {% block content %}{% endblock %}

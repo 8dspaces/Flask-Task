@@ -6,13 +6,21 @@
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#run" aria-controls="run" role="tab" data-toggle="tab">Run Job</a></li>
     <li role="presentation"><a href="#how" aria-controls="how" role="tab" data-toggle="tab">HowTo</a></li>
+    {% if job %}
     <li role="presentation"><a href="#console" aria-controls="console" role="tab" data-toggle="tab">Running Status</a></li>
+    {% endif %}
   </ul>
 <br><br>
   <!-- Tab panes -->
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="run">
         <div>
+<div class="panel panel-default ">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">Job Options</h3>
+    </div>
+
             <form method="post" enctype="multipart/form-data" action="{{ url_for('public.create_job', script_id=script.id) }}" class="full-height">
 
             <!-- <ul class="nav nav-tabs">
@@ -21,12 +29,13 @@
                 {% endfor %}
             </ul> -->
 
+
             {% for section in ['required','optional'] %}
             <!-- <section role="tabpanel" aria-hidden="false" class="content {% if loop.first %}active{% endif %}" id="settings-{{section}}"> -->
             {% if section=='required' %}
-                <div class="panel panel-primary">
+                <div class="panel panel-primary panel-custom">
             {% else %}
-                <div class="panel panel-info">
+                <div class="panel panel-info panel-custom">
             {% endif %}
               <!-- Default panel contents -->
               <div class="panel-heading">
@@ -34,14 +43,14 @@
               </div>
               <div class="panel-body">
               {% for w in metadata[section] %}
-                <div class="row">
+                <div >
                   <div class="large-12 columns">
                       {% if w['widget'] == 'FileChooser' %}
                           <label for="{{ w['name'] }}">{{ w['help'] }} {% if w['required'] %}<small>required</small>{% endif %}
                               <input type="file" name="{{ w['name'] }}" id="{{ w['name'] }}" {% if w['required'] %}required{% endif %}>
                           </label>
                       {% elif w['widget'] == 'CheckBox' %}
-                          <div class="row">
+                          <div >
                               <div class="large-1 columns">
                                   <input type="checkbox" placeholder="{{ w['default'] }}" id="{{ w['name'] }}" name="{{ w['name'] }}">
                               </div>
@@ -84,12 +93,13 @@
               </div>
             </div>
             {% endfor%}
-            <hr>
-            <input type="button" class="btn btn-primary" value="Cancel" onclick="window.history.back()">
-            <input type="submit" class="btn btn-primary" value="Run">
+            <div class="panel-custom">
+                <input type="button" class="btn btn-warning" value="Cancel Job" onclick="window.history.back()">
+                <input type="submit" class="btn btn-success " value="Run Job">
+            </div>
             </form>
         </div>
-
+        </div>
     </div>
     <div role="tabpanel" class="tab-pane" id="how">
         <section role="tabpanel" aria-hidden="{% if job %}true{% endif %}" class="content {% if not job %}active{% endif %}" id="help-about">
@@ -104,8 +114,8 @@
             </div>
         </section>
     </div>
+    {% if job %}
     <div role="tabpanel" class="tab-pane" id="console">
-        {% if job %}
             <section>
                 <div class="console full-height">
                     <div id="console-body" class="large-12 columns console-body">{{ job.console }}</div>

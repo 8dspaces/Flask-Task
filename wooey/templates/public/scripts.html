@@ -1,8 +1,13 @@
 
 {% extends "layout.html" %}
+{% block subtitle %}
+<li ><a href="{{ url_for('public.scripts') }}">scripts</a></li>
+{% endblock %}
 {% block content %}
 
-<h1>Available Scripts</h1>
+<div class="page-header">
+  <h2>Available Scripts</h2>
+</div>
 
 {% include "public/script-list.html" %}
 

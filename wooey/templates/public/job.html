@@ -1,6 +1,6 @@
 
 {% extends "layout.html" %}
-{% block content_class %}row full-width full-height-minus-header{% endblock content_class %}
+{% block content_class %} content {% endblock content_class %}
 {% block subtitle %}
 <li ><a href="{{ url_for('public.scripts') }}">scripts</a></li>
 <li class="active"><a href="{{ url_for('public.create_job', script_id=script.id) }}">{{ script.name }} </a></li>
@@ -53,11 +53,6 @@ $(document).ready(function () {
 </script>
 {% endblock %}
 
-<!-- <div class="jumbotron">
-  <h1>Hello, world!</h1>
-  <p>...</p>
-  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-</div> -->
 
 {% block header %}
 <!-- <div class="row header full-width">
@@ -67,13 +62,19 @@ $(document).ready(function () {
 
 {% if job %}
     <div class="page-header">
-      <h1>Job:<small>{% if script.description %}{{ script.description }}{% else %}&nbsp;{% endif %}</small></h1>
+      <h2>JOB:<small>{% if script.description %}{{ script.description }}{% else %}&nbsp;{% endif %}</small></h2>
     </div>
     <div class="alert alert-success alert-dismissible" role="alert">
-    <a href="#" class="alert-link">...</a>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <!-- <a href="#" class="alert-link">...</a> -->
     Current job <a class="alert-link" href="{{ url_for('public.job', job_id=job.id) }}">#{{ job.id }}</a> submitted by <span class="primary">{{ job.user.username or 'Guest' }}</span> on {{ job.created_at.strftime('%Y-%m-%d %H:%M:%S') }}
     &bull; Priority <span class="primary">{{ job.priority }}</span>
     {% if job.created_at != job.updated_at %}&bull; Updated {{ job.updated_at.strftime('%Y-%m-%d %H:%M:%S') }}{% endif %}
+
+    {% if job.status == 'W' %}<span class="label label-warning">Waiting</span>
+    {% elif job.status == 'R' %}<span class="label label-primary">Running</span>
+    {% elif job.status == 'C' %}<span class="label label-success">Complete</span>
+    {% elif job.status == 'X' %}<span class="label label-danger">Error</span>{% endif %}
     </div>
 {% endif %}
 

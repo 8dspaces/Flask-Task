@@ -1,6 +1,8 @@
 
 {% extends "layout.html" %}
-
+{% block subtitle %}
+<li ><a href="{{ url_for('public.about') }}">About</a></li>
+{% endblock %}
 {% block content %}
 <div class="row">
     <div class="large-12 columns">
@@ -31,4 +33,3 @@ like Shiny for R, except multi-user out of the box. Support for multiple command
     </div>
 </div>
 {% endblock %}
-

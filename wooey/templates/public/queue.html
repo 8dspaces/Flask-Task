@@ -1,5 +1,8 @@
 
 {% extends "layout.html" %}
+{% block subtitle %}
+<li ><a href="{{ url_for('public.queue') }}">queue</a></li>
+{% endblock %}
 {% block content %}
     <h1>Queued Jobs</h1>
 

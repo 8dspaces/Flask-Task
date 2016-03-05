@@ -313,3 +313,65 @@ span.status-X span.label.status-error    {display: inline-block; }
 
 .download-button.download-true .download-yes-button {display: inline;}
 .download-button.download-false .download-no-button {display: inline;}
+
+.bs-docs-header, .bs-docs-masthead {
+  position: relative;
+  padding: 30px 0;
+  color: #f5f5f5;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(0,0,0,.1);
+  #607D8B;
+  background-color: #607D8B; //#eee;
+
+  /*#6f5499;
+  background-image: -webkit-gradient(linear,left top,left bottom,from(#563d7c),to(#6f5499));
+  background-image: -webkit-linear-gradient(top,#563d7c 0,#6f5499 100%);
+  background-image: -o-linear-gradient(top,#563d7c 0,#6f5499 100%);
+  background-image: linear-gradient(to bottom,#563d7c 0,#6f5499 100%);*/
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#563d7c', endColorstr='#6F5499', GradientType=0);
+  background-repeat: repeat-x;
+  }
+  .bs-docs-header {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-size: 15px;
+  text-align: left;
+  height: 200px;
+  }
+
+  .bs-docs-header p {
+    margin-bottom: 15px;
+    font-size: 15px;
+    font-weight: 200;
+   }
+   .bs-docs-header small {
+     font-size: 15px;
+     font-weight: 200;
+     color: white;
+    }
+  .navbar {
+      position: relative;
+      min-height: 50px;
+      margin-bottom: 0px !important;
+      border: 1px solid transparent;
+  }
+  .bs-docs-footer {
+      padding-top: 40px;
+      padding-bottom: 40px;
+      margin-top: 100px;
+      color: #767676;
+      text-align: center;
+      border-top: 1px solid #e5e5e5;
+  }
+  .content{
+      margin-top: 30px;
+  }
+  .panel-custom{
+      margin: 15px;
+  }
+  .btn-outline {
+      color: #f5f5f5;
+      background-color: transparent;
+      //border-color: #563d7c;
+      border: 1px solid #f5f5f5 !important;;
+  }
