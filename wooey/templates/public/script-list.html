@@ -30,13 +30,13 @@
                 </a>
             {% endif %}
         </h5>
-        <p>{{ script.description}}</p> <!--| truncate(10,True)-->
+        <p>{{ script.description | string | truncate(40,True) }}</p> <!--| truncate(10,True)-->
       </div>
     </div>
   </div>
   {% endfor %}
 </div>
-<hr/>
+
 <!-- <ul >
   {% for script in scripts %}
     <li class="{% if not script.is_active or not script.is_authorised %} inactive{% endif %}"><div class="script radius">

@@ -1,3 +1,139 @@
+
+
+<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#run" aria-controls="run" role="tab" data-toggle="tab">Run Job</a></li>
+    <li role="presentation"><a href="#how" aria-controls="how" role="tab" data-toggle="tab">HowTo</a></li>
+    <li role="presentation"><a href="#console" aria-controls="console" role="tab" data-toggle="tab">Running Status</a></li>
+  </ul>
+<br><br>
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="run">
+        <div>
+            <form method="post" enctype="multipart/form-data" action="{{ url_for('public.create_job', script_id=script.id) }}" class="full-height">
+
+            <!-- <ul class="nav nav-tabs">
+                {% for section in ['required','optional'] %}
+                  <li class="{% if loop.first %}active{% endif %}" role="presentation" ><a href="#settings-{{section}}" role="tab" tabindex="0" aria-selected="{% if loop.first %}true{% else %}false{% endif %}" controls="settings-{{section}}">{{section}}</a></li>
+                {% endfor %}
+            </ul> -->
+
+            {% for section in ['required','optional'] %}
+            <!-- <section role="tabpanel" aria-hidden="false" class="content {% if loop.first %}active{% endif %}" id="settings-{{section}}"> -->
+            {% if section=='required' %}
+                <div class="panel panel-primary">
+            {% else %}
+                <div class="panel panel-info">
+            {% endif %}
+              <!-- Default panel contents -->
+              <div class="panel-heading">
+                  <h3 class="panel-title">{{section | title}}</h3>
+              </div>
+              <div class="panel-body">
+              {% for w in metadata[section] %}
+                <div class="row">
+                  <div class="large-12 columns">
+                      {% if w['widget'] == 'FileChooser' %}
+                          <label for="{{ w['name'] }}">{{ w['help'] }} {% if w['required'] %}<small>required</small>{% endif %}
+                              <input type="file" name="{{ w['name'] }}" id="{{ w['name'] }}" {% if w['required'] %}required{% endif %}>
+                          </label>
+                      {% elif w['widget'] == 'CheckBox' %}
+                          <div class="row">
+                              <div class="large-1 columns">
+                                  <input type="checkbox" placeholder="{{ w['default'] }}" id="{{ w['name'] }}" name="{{ w['name'] }}">
+                              </div>
+                              <div class="large-11 columns">
+                                  <label for="{{ w['name'] }}">{{ w['help'] }}</label>
+                              </div>
+                          </div>
+                      {% elif w['widget'] == 'TextField' %}
+                          <label for="{{ w['name'] }}">{{ w['help'] }} {% if w['required'] %}<small>required</small>{% endif %}
+                              <input type="text" {% if not w['required'] %}placeholder="{{ w['default'] }}"{% endif %} id="{{ w['name'] }}" name="{{ w['name'] }}" {% if w['required'] %}required{% endif %}>
+                          </label>
+                      {% elif w['widget'] == 'RangeField' %}
+                          <label for="{{ w['name'] }}">{{ w['help'] }}
+                              <input onchange="this.form.{{ w['name'] }}_output.value=this.value" type="range" placeholder="{{ w['default'] }}" id="{{ w['name'] }}" name="{{ w['name'] }}" min="{{ w['choices'][0] }}" max="{{ w['choices'][1] }}" step="{{ w['choices'][2] }}">
+                              <output name="{{ w['name'] }}_output" for="{{ w['name'] }}">0</output>
+                          </label>
+                      {% elif w['widget'] == 'SelectOne' or w['widget'] == 'SelectMany' %}
+                          <label for="{{ w['name'] }}">{{ w['help'] }}
+                              <select type="text" placeholder="{{ w['default'] }}" id="{{ w['name'] }}" name="{{ w['name'] }}" {% if w['widget'] == 'SelectMany' %}multiple{% endif %}>
+                                  {% if w['choices'] is mapping %}
+                                      {% for choice, label in w['choices'].items() %}
+                                          <option value="{{ choice }}" {% if choice == w['default'] %}selected{% endif %}>{{ label }}</option>
+                                      {% endfor %}
+
+                                  {% else %}
+
+                                      {% for choice in w['choices'] %}
+                                          <option value="{{ choice }}" {% if choice == w['default'] %}selected{% endif %}>{{ choice }}</option>
+                                      {% endfor %}
+
+                                  {% endif %}
+
+                              </select>
+                          </label>
+                      {% else %}
+                      {% endif %}
+                      </div>
+                    </div>
+                  {% endfor %}
+              </div>
+            </div>
+            {% endfor%}
+            <hr>
+            <input type="button" class="btn btn-primary" value="Cancel" onclick="window.history.back()">
+            <input type="submit" class="btn btn-primary" value="Run">
+            </form>
+        </div>
+
+    </div>
+    <div role="tabpanel" class="tab-pane" id="how">
+        <section role="tabpanel" aria-hidden="{% if job %}true{% endif %}" class="content {% if not job %}active{% endif %}" id="help-about">
+            <div class="row">
+                <div class="large-12 columns pad-edges help-about">
+                    {% if documentation %}
+                        {{ documentation|safe }}
+                    {% else %}
+                        <p>There is no documentation for this script.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="console">
+        {% if job %}
+            <section>
+                <div class="console full-height">
+                    <div id="console-body" class="large-12 columns console-body">{{ job.console }}</div>
+                </div>
+            </section>
+
+            {% for section, oo in display.items() %}
+                {% include "public/job_content.html" %}
+            {% endfor %}
+
+        {% else %}
+            <p>There is no job running</p>
+        {% endif %}
+
+    </div>
+  </div>
+
+</div>
+
+<!-- <script type="text/javascript">
+    $('#myTabs a').click(function (e) {
+      e.preventDefault()
+      $(this).tab('show')
+    })
+</script> -->
+
+
+<!--
 <div class="large-4 columns no-pad-edges full-height">
 
 <ul class="tabs settings-panel-tabs" data-tab role="tablist">
@@ -5,6 +141,7 @@
       <li class="tab-title {% if loop.first %}active{% endif %}" role="presentational" ><a href="#settings-{{section}}" role="tab" tabindex="0" aria-selected="{% if loop.first %}true{% else %}false{% endif %}" controls="settings-{{section}}">{{section}}</a></li>
     {% endfor %}
 </ul>
+
 
 <form method="post" enctype="multipart/form-data" action="{{ url_for('public.create_job', script_id=script.id) }}" class="full-height">
 <div class="tabs-content settings-panel full-height">
@@ -59,9 +196,6 @@
                 </label>
             {% else %}
             {% endif %}
-
-
-
             </div>
           </div>
         {% endfor %}
@@ -75,10 +209,6 @@
         <input type="submit" class="button small success radius" value="Run">
     </div></div>
 </div>
-
-    </div>
-
-
-
-    </form>
 </div>
+</form>
+</div> -->
