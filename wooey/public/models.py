@@ -129,7 +129,7 @@ class Job(SurrogatePK, Model):
     def console(self):
         try:
             with open(os.path.join(self.path, 'STDOUT'), 'rU') as f:
-                console = f.read().decode('utf8')
+                console = f.read() #.decode('utf8')
 
         except IOError:
             console = ""

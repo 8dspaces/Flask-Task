@@ -160,8 +160,8 @@ def start_daemon():
             no_of_running_jobs = jobs_running.count()
 
             # Check each vs. running subprocesses to see if still active (if not, update database with new status)
-            for k, v in pids.items():
-
+            # for k, v in pids.items():
+            for k, v in pids:  # fix issue in PY3
                 # Check process status and flush to file
                 v['process'].poll()
 

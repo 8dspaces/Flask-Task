@@ -16,7 +16,7 @@
               function(){
               $.getJSON("{{ url_for('public.job_json', job_id=job.id) }}", {
               }, function(data) {
-                console.log("what if");
+
                 $("#status").attr('class', 'status status-' + data.status);
                 $("#console-body").text(data.console);
 
@@ -28,7 +28,7 @@
                     a = $("#section-"+d+"-a")
 
                     if(a.length){ // Exists, replace content
-                            console.log("what if");
+                            
                             a.html(d+' <span class="label round">'+data.display[d].count+' </span>')
                             s = $("#section-"+d)
                             var is_active = s.hasClass('active')
@@ -49,7 +49,7 @@
                 }
 
                 // Update the content of each section with the latest data
-                if (data.status == 'C' || data.status == 'E'){
+                if (data.status == 'C' || data.status == 'X'){
                     clearInterval(status_check_interval)
                 }
               });
