@@ -1,0 +1,270 @@
+{
+    "program": {
+        "path": "/Users/qimick/Documents/Wooey-0.0.4/scripts/longitudinal.py", 
+        "epilog": null, 
+        "name": "longitudinal", 
+        "description": null
+    }, 
+    "parser": {
+        "prefix_chars": "-", 
+        "argument_default": null
+    }, 
+    "required": [
+        {
+            "commands": [
+                "-f", 
+                "--file"
+            ], 
+            "required": true, 
+            "name": "file", 
+            "default": null, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "FileType", 
+            "widget": "FileChooser", 
+            "help": "csv file containing source data"
+        }
+    ], 
+    "optional": [
+        {
+            "commands": [
+                "-m", 
+                "--metabolite"
+            ], 
+            "required": false, 
+            "name": "metabolite", 
+            "default": "", 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "TextField", 
+            "help": "name of metabolite to plot graph for"
+        }, 
+        {
+            "commands": [
+                "-l", 
+                "--longitude"
+            ], 
+            "required": false, 
+            "name": "longitudinal", 
+            "default": "(\\d+)", 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "TextField", 
+            "help": "regex pattern for longitudinal data: grouped area is x axis"
+        }, 
+        {
+            "commands": [
+                "-c", 
+                "--control"
+            ], 
+            "required": false, 
+            "name": "control", 
+            "default": false, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "TextField", 
+            "help": "regex pattern for control data"
+        }, 
+        {
+            "commands": [
+                "-s", 
+                "--search"
+            ], 
+            "required": false, 
+            "name": "search", 
+            "default": null, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "TextField", 
+            "help": "only show classes matching this regex"
+        }, 
+        {
+            "commands": [
+                "--styles"
+            ], 
+            "required": false, 
+            "name": "styles", 
+            "default": null, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "TextField", 
+            "help": "style pattern to use to assign colors/markers/lines to lines; (3),(regex),(groups)"
+        }, 
+        {
+            "commands": [
+                "--xlabel"
+            ], 
+            "required": false, 
+            "name": "xlabel", 
+            "default": "", 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "TextField", 
+            "help": "x axis label for graph"
+        }, 
+        {
+            "commands": [
+                "--ylabel"
+            ], 
+            "required": false, 
+            "name": "ylabel", 
+            "default": "", 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "TextField", 
+            "help": "y axis label for graph"
+        }, 
+        {
+            "commands": [
+                "--xax"
+            ], 
+            "required": false, 
+            "name": "xax", 
+            "default": false, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "TextField", 
+            "help": "log/reg/(lin) x axis"
+        }, 
+        {
+            "commands": [
+                "--yax"
+            ], 
+            "required": false, 
+            "name": "yax", 
+            "default": false, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "TextField", 
+            "help": "log/reg/(lin) y axis"
+        }, 
+        {
+            "commands": [
+                "--ylim"
+            ], 
+            "required": false, 
+            "name": "ylim", 
+            "default": null, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "TextField", 
+            "help": "min,max for y axis"
+        }, 
+        {
+            "commands": [
+                "-t", 
+                "--title"
+            ], 
+            "required": false, 
+            "name": "title", 
+            "default": null, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "TextField", 
+            "help": "title for graph"
+        }, 
+        {
+            "commands": [
+                "--dpi"
+            ], 
+            "required": false, 
+            "name": "dpi", 
+            "default": 72, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "TextField", 
+            "help": "dpi for output"
+        }, 
+        {
+            "commands": [
+                "--format"
+            ], 
+            "required": false, 
+            "name": "format", 
+            "default": "png", 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "TextField", 
+            "help": "fileformat for output"
+        }, 
+        {
+            "commands": [
+                "-b", 
+                "--batch"
+            ], 
+            "required": false, 
+            "name": "batch_mode", 
+            "default": false, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "CheckBox", 
+            "help": "batch mode, process all metabolite matches with same parameters"
+        }, 
+        {
+            "commands": [
+                "--multiplot"
+            ], 
+            "required": false, 
+            "name": "multiplot", 
+            "default": false, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "CheckBox", 
+            "help": "plot more than one graph on a figure"
+        }, 
+        {
+            "commands": [
+                "--shareyaxis"
+            ], 
+            "required": false, 
+            "name": "shareyaxis", 
+            "default": false, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "CheckBox", 
+            "help": "whether to share y axis scale (and show on multiplots)"
+        }, 
+        {
+            "commands": [
+                "--smooth"
+            ], 
+            "required": false, 
+            "name": "smooth", 
+            "default": false, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "CheckBox", 
+            "help": "smooth graph through cubic interpolation"
+        }, 
+        {
+            "commands": [
+                "--annotate"
+            ], 
+            "required": false, 
+            "name": "annotate", 
+            "default": false, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "CheckBox", 
+            "help": "show command annotation for generation"
+        }
+    ]
+}

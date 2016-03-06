@@ -1,0 +1,232 @@
+{
+    "program": {
+        "path": "/Users/qimick/Documents/Wooey-0.0.4/scripts/bar.py", 
+        "epilog": null, 
+        "name": "bar", 
+        "description": "Plot simple bar figures using matplotlib"
+    }, 
+    "parser": {
+        "prefix_chars": "-", 
+        "argument_default": null
+    }, 
+    "required": [
+        {
+            "commands": [
+                "-f", 
+                "--file"
+            ], 
+            "required": true, 
+            "name": "file", 
+            "default": null, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "FileType", 
+            "widget": "FileChooser", 
+            "help": "csv file containing source data"
+        }
+    ], 
+    "optional": [
+        {
+            "commands": [
+                "--statistic"
+            ], 
+            "required": false, 
+            "name": "statistic", 
+            "default": null, 
+            "nargs": "", 
+            "choices": {
+                "tind": "Independent-samples T-test", 
+                "trel": "Related-samples T-test"
+            }, 
+            "type": "NoneType", 
+            "widget": "SelectOne", 
+            "help": "Statistical test: tind (t-independent), trel (t-related)"
+        }, 
+        {
+            "commands": [
+                "-m", 
+                "--metabolite"
+            ], 
+            "required": false, 
+            "name": "metabolite", 
+            "default": "", 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "TextField", 
+            "help": "name of metabolite to plot graph for"
+        }, 
+        {
+            "commands": [
+                "-g", 
+                "--group"
+            ], 
+            "required": false, 
+            "name": "axisgroup", 
+            "default": null, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "TextField", 
+            "help": "Regular Expression pattern for axis cluster"
+        }, 
+        {
+            "commands": [
+                "-s", 
+                "--search"
+            ], 
+            "required": false, 
+            "name": "search", 
+            "default": null, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "TextField", 
+            "help": "Show classes matching this regex"
+        }, 
+        {
+            "commands": [
+                "-t"
+            ], 
+            "required": false, 
+            "name": "tests", 
+            "default": null, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "TextField", 
+            "help": "CLASS,CLASS combinations to statisically test (space-separated)"
+        }, 
+        {
+            "commands": [
+                "--xlabel"
+            ], 
+            "required": false, 
+            "name": "xlabel", 
+            "default": "", 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "TextField", 
+            "help": "X axis label"
+        }, 
+        {
+            "commands": [
+                "--ylabel"
+            ], 
+            "required": false, 
+            "name": "ylabel", 
+            "default": "", 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "TextField", 
+            "help": "Y axis label"
+        }, 
+        {
+            "commands": [
+                "--ylim"
+            ], 
+            "required": false, 
+            "name": "ylim", 
+            "default": null, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "float", 
+            "widget": "TextField", 
+            "help": "min,max for y axis"
+        }, 
+        {
+            "commands": [
+                "--title"
+            ], 
+            "required": false, 
+            "name": "title", 
+            "default": null, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "TextField", 
+            "help": "Graph title"
+        }, 
+        {
+            "commands": [
+                "--dpi"
+            ], 
+            "required": false, 
+            "name": "dpi", 
+            "default": 72, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "int", 
+            "widget": "TextField", 
+            "help": "DPI of output (TIF format only)"
+        }, 
+        {
+            "commands": [
+                "--format"
+            ], 
+            "required": false, 
+            "name": "format", 
+            "default": "png", 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "TextField", 
+            "help": "File format for output"
+        }, 
+        {
+            "commands": [
+                "-b", 
+                "--batch"
+            ], 
+            "required": false, 
+            "name": "batch_mode", 
+            "default": false, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "CheckBox", 
+            "help": "Batch mode (process all metabolite matches with same parameters)"
+        }, 
+        {
+            "commands": [
+                "--multiplot"
+            ], 
+            "required": false, 
+            "name": "multiplot", 
+            "default": false, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "CheckBox", 
+            "help": "Plot more than one graph per figure"
+        }, 
+        {
+            "commands": [
+                "--shareyaxis"
+            ], 
+            "required": false, 
+            "name": "shareyaxis", 
+            "default": false, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "CheckBox", 
+            "help": "Share y axis scale"
+        }, 
+        {
+            "commands": [
+                "--annotate"
+            ], 
+            "required": false, 
+            "name": "annotate", 
+            "default": false, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "CheckBox", 
+            "help": "show command annotation for generation"
+        }
+    ]
+}

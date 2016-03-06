@@ -1,0 +1,35 @@
+{
+    "program": {
+        "path": "/Users/qimick/Documents/Wooey-0.0.4/scripts/8 Queens Problem.py", 
+        "epilog": null, 
+        "name": "8 Queens Problem", 
+        "description": "Solve the 8 Queens problem for arbritary sized boards up to 9"
+    }, 
+    "parser": {
+        "prefix_chars": "-", 
+        "argument_default": null
+    }, 
+    "required": [], 
+    "optional": [
+        {
+            "commands": [
+                "-s", 
+                "--size"
+            ], 
+            "required": false, 
+            "name": "size", 
+            "default": 4, 
+            "nargs": "", 
+            "choices": [
+                3, 
+                4, 
+                5, 
+                6, 
+                7
+            ], 
+            "type": "int", 
+            "widget": "SelectOne", 
+            "help": "size of the board"
+        }
+    ]
+}

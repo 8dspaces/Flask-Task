@@ -1,0 +1,53 @@
+{
+    "program": {
+        "path": "/Users/qimick/Documents/Wooey-0.0.4/scripts/mock_argparse_example.py", 
+        "epilog": null, 
+        "name": "mock_argparse_example", 
+        "description": "Process some integers."
+    }, 
+    "parser": {
+        "prefix_chars": "-", 
+        "argument_default": null
+    }, 
+    "required": [
+        {
+            "commands": [], 
+            "required": true, 
+            "name": "integers", 
+            "default": null, 
+            "nargs": "+", 
+            "choices": [], 
+            "type": "int", 
+            "widget": "TextField", 
+            "help": "an integer for the accumulator"
+        }
+    ], 
+    "optional": [
+        {
+            "commands": [
+                "--womp"
+            ], 
+            "required": false, 
+            "name": "womp", 
+            "default": 0, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "int", 
+            "widget": "TextField", 
+            "help": "subtract value"
+        }, 
+        {
+            "commands": [
+                "--sum"
+            ], 
+            "required": false, 
+            "name": "accumulate", 
+            "default": "max", 
+            "nargs": "", 
+            "choices": [], 
+            "type": "NoneType", 
+            "widget": "CheckBox", 
+            "help": "sum the integers (default: find the max)"
+        }
+    ]
+}

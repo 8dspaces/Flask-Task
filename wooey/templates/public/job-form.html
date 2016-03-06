@@ -21,7 +21,7 @@
                 <h3 class="panel-title">Job Options</h3>
             </div>
 
-            <form method="post" enctype="multipart/form-data" action="{{ url_for('public.create_job', script_id=script.id) }}" class="full-height">
+            <form method="post" enctype="multipart/form-data" action="{{ url_for('public.create_job', script_id=script.id) }}" > <!--class="full-height"-->
 
             <!-- <ul class="nav nav-tabs">
                 {% for section in ['required','optional'] %}
@@ -50,14 +50,12 @@
                               <input type="file" name="{{ w['name'] }}" id="{{ w['name'] }}" {% if w['required'] %}required{% endif %}>
                           </label>
                       {% elif w['widget'] == 'CheckBox' %}
-                          <div >
-                              <div class="large-1 columns">
-                                  <input type="checkbox" placeholder="{{ w['default'] }}" id="{{ w['name'] }}" name="{{ w['name'] }}">
+                              <div class="checkbox">
+                                  <label>
+                                      <input type="checkbox" placeholder="{{ w['default'] }}" id="{{ w['name'] }}" name="{{ w['name'] }}">{{ w['help'] }}
+                                  </label>
                               </div>
-                              <div class="large-11 columns">
-                                  <label for="{{ w['name'] }}">{{ w['help'] }}</label>
-                              </div>
-                          </div>
+
                       {% elif w['widget'] == 'TextField' %}
                           <label for="{{ w['name'] }}">{{ w['help'] }} {% if w['required'] %}<small>required</small>{% endif %}
                               <input type="text" {% if not w['required'] %}placeholder="{{ w['default'] }}"{% endif %} id="{{ w['name'] }}" name="{{ w['name'] }}" {% if w['required'] %}required{% endif %}>
@@ -133,6 +131,13 @@
 
     {% if job and job.has_output%}
     <div role="tabpanel" class="tab-pane" id="output">
+        <div id="download-button" class="large-3 columns download-button {% if job.has_output %}download-true{% else %}download-false{% endif %}">
+                <span class="download-yes-button">
+                You can download results by<a href="{{ url_for('public.download_job_output', job_id=job.id, format='.zip') }}" class="button small split right radius"><i class="fa fa-download"></i> Download <span data-dropdown="drop"></span></a>
+                </span>
+                <span class="download-no-button button small right secondary disabled radius"><i class="fa fa-warning"></i> No download</span>
+        </div>
+
         {% for section, oo in display.items() %}
             {% include "public/job_content.html" %}
         {% endfor %}
@@ -140,91 +145,3 @@
     {% endif %}
 
 </div>
-
-<!-- <script type="text/javascript">
-    $('#myTabs a').click(function (e) {
-      e.preventDefault()
-      $(this).tab('show')
-    })
-</script> -->
-
-
-<!--
-<div class="large-4 columns no-pad-edges full-height">
-
-<ul class="tabs settings-panel-tabs" data-tab role="tablist">
-    {% for section in ['required','optional'] %}
-      <li class="tab-title {% if loop.first %}active{% endif %}" role="presentational" ><a href="#settings-{{section}}" role="tab" tabindex="0" aria-selected="{% if loop.first %}true{% else %}false{% endif %}" controls="settings-{{section}}">{{section}}</a></li>
-    {% endfor %}
-</ul>
-
-
-<form method="post" enctype="multipart/form-data" action="{{ url_for('public.create_job', script_id=script.id) }}" class="full-height">
-<div class="tabs-content settings-panel full-height">
-
-   {% for section in ['required','optional'] %}
-    <section role="tabpanel" aria-hidden="false" class="content {% if loop.first %}active{% endif %}" id="settings-{{section}}">
-
-    {% for w in metadata[section] %}
-      <div class="row">
-        <div class="large-12 columns">
-            {% if w['widget'] == 'FileChooser' %}
-                <label for="{{ w['name'] }}">{{ w['help'] }} {% if w['required'] %}<small>required</small>{% endif %}
-                    <input type="file" name="{{ w['name'] }}" id="{{ w['name'] }}" {% if w['required'] %}required{% endif %}>
-                </label>
-            {% elif w['widget'] == 'CheckBox' %}
-                <div class="row">
-                    <div class="large-1 columns">
-                        <input type="checkbox" placeholder="{{ w['default'] }}" id="{{ w['name'] }}" name="{{ w['name'] }}">
-                    </div>
-                    <div class="large-11 columns">
-                        <label for="{{ w['name'] }}">{{ w['help'] }}</label>
-                    </div>
-                </div>
-            {% elif w['widget'] == 'TextField' %}
-                <label for="{{ w['name'] }}">{{ w['help'] }} {% if w['required'] %}<small>required</small>{% endif %}
-                    <input type="text" {% if not w['required'] %}placeholder="{{ w['default'] }}"{% endif %} id="{{ w['name'] }}" name="{{ w['name'] }}" {% if w['required'] %}required{% endif %}>
-                </label>
-            {% elif w['widget'] == 'RangeField' %}
-                <label for="{{ w['name'] }}">{{ w['help'] }}
-                    <input onchange="this.form.{{ w['name'] }}_output.value=this.value" type="range" placeholder="{{ w['default'] }}" id="{{ w['name'] }}" name="{{ w['name'] }}" min="{{ w['choices'][0] }}" max="{{ w['choices'][1] }}" step="{{ w['choices'][2] }}">
-                    <output name="{{ w['name'] }}_output" for="{{ w['name'] }}">0</output>
-                </label>
-            {% elif w['widget'] == 'SelectOne' or w['widget'] == 'SelectMany' %}
-                <label for="{{ w['name'] }}">{{ w['help'] }}
-                    <select type="text" placeholder="{{ w['default'] }}" id="{{ w['name'] }}" name="{{ w['name'] }}" {% if w['widget'] == 'SelectMany' %}multiple{% endif %}>
-
-                        {% if w['choices'] is mapping %}
-
-                            {% for choice, label in w['choices'].items() %}
-                                <option value="{{ choice }}" {% if choice == w['default'] %}selected{% endif %}>{{ label }}</option>
-                            {% endfor %}
-
-                        {% else %}
-
-                            {% for choice in w['choices'] %}
-                                <option value="{{ choice }}" {% if choice == w['default'] %}selected{% endif %}>{{ choice }}</option>
-                            {% endfor %}
-
-                        {% endif %}
-
-                    </select>
-                </label>
-            {% else %}
-            {% endif %}
-            </div>
-          </div>
-        {% endfor %}
-
-    </section>
-   {% endfor%}
-
-<div class="row settings-buttons">
-    <div class="large-12 columns"><div class="right">
-        <input type="button" class="button small alert radius" value="Cancel" onclick="window.history.back()">
-        <input type="submit" class="button small success radius" value="Run">
-    </div></div>
-</div>
-</div>
-</form>
-</div> -->

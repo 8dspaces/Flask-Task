@@ -1,0 +1,68 @@
+{
+    "program": {
+        "path": "/Users/qimick/Documents/Wooey-0.0.4/scripts/Collatz Dash.py", 
+        "epilog": null, 
+        "name": "Collatz Dash", 
+        "description": "An implementation of the Boston Python Collatz Dash"
+    }, 
+    "parser": {
+        "prefix_chars": "-", 
+        "argument_default": null
+    }, 
+    "required": [
+        {
+            "commands": [
+                "-a"
+            ], 
+            "required": true, 
+            "name": "a", 
+            "default": null, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "int", 
+            "widget": "TextField", 
+            "help": "Age of contestant A"
+        }, 
+        {
+            "commands": [
+                "-b"
+            ], 
+            "required": true, 
+            "name": "b", 
+            "default": null, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "int", 
+            "widget": "TextField", 
+            "help": "Age of contestant B"
+        }
+    ], 
+    "optional": [
+        {
+            "commands": [
+                "-namea"
+            ], 
+            "required": false, 
+            "name": "namea", 
+            "default": "A", 
+            "nargs": "", 
+            "choices": [], 
+            "type": "str", 
+            "widget": "TextField", 
+            "help": "Name of contestant A"
+        }, 
+        {
+            "commands": [
+                "-nameb"
+            ], 
+            "required": false, 
+            "name": "nameb", 
+            "default": "B", 
+            "nargs": "", 
+            "choices": [], 
+            "type": "str", 
+            "widget": "TextField", 
+            "help": "Name of contestant B"
+        }
+    ]
+}

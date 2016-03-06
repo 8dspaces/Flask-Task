@@ -1,0 +1,44 @@
+{
+    "program": {
+        "path": "/Users/qimick/Documents/Wooey-0.0.4/scripts/IMDB.py", 
+        "epilog": null, 
+        "name": "IMDB", 
+        "description": "Lookup information on films via IMDB"
+    }, 
+    "parser": {
+        "prefix_chars": "-", 
+        "argument_default": null
+    }, 
+    "required": [
+        {
+            "commands": [
+                "-t", 
+                "--title"
+            ], 
+            "required": true, 
+            "name": "title", 
+            "default": null, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "str", 
+            "widget": "TextField", 
+            "help": "Title of film"
+        }
+    ], 
+    "optional": [
+        {
+            "commands": [
+                "-y", 
+                "--y"
+            ], 
+            "required": false, 
+            "name": "year", 
+            "default": null, 
+            "nargs": "", 
+            "choices": [], 
+            "type": "int", 
+            "widget": "TextField", 
+            "help": "Year of release"
+        }
+    ]
+}

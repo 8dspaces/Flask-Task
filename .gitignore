@@ -49,7 +49,7 @@ env*
 
 
 .idea
-dev.db
+#dev.db
 
 migrations
 instance

@@ -1,0 +1,26 @@
+{
+    "program": {
+        "path": "/Users/qimick/Documents/Wooey-0.0.4/scripts/plot_some_numbers.py", 
+        "epilog": null, 
+        "name": "plot_some_numbers", 
+        "description": "Plot some numbers."
+    }, 
+    "parser": {
+        "prefix_chars": "-", 
+        "argument_default": null
+    }, 
+    "required": [
+        {
+            "commands": [], 
+            "required": true, 
+            "name": "integers", 
+            "default": null, 
+            "nargs": "+", 
+            "choices": [], 
+            "type": "int", 
+            "widget": "TextField", 
+            "help": "a space separated list of numbers to plot"
+        }
+    ], 
+    "optional": []
+}
