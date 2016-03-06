@@ -1,35 +1,12 @@
-![Wooey!](wooey-banner.png)
 
-## About
+## Wooey-Flask    
+-----
 
 **Wooey-Flask** is a prvious version of Wooey and made some changes, because i prefer to use Flask and Bootstarp  
------
+
 
 Wooey is a simple web interface (built on Flask) to run command line Python scripts. Think of it as an easy way to get
 your scripts up on the web for routine data analysis, file processing, or anything else.
-
-![Script output view](large-view-output.png)
-
-Impressed by what [Gooey](https://github.com/chriskiehl/Gooey) can do, turning ArgumentParser-based command-line scripts
-into WxWidgets-based GUIs, I thought
-I'd see if I could do the same for the web. I'm still not sure if the result is beautiful or horrific.
-
-Wooey (see what I did there?) is built on the same, but slightly modified, back-end conversion of ArgumentParser
-instances to JSON definitions. These definitions are used to construct a web-based UI with type-dependent widgets.
-Submitted configurations are parsed, using the JSON definition, to command line arguments that are then submitted to a job queue.
-
-Jobs in the queue are automatically run and the results made available in the job view, with smart handling of outputs
-such as images (CSV, etc. to be supported via pandas, possibly some kind of plugin system) into a tabbed output viewer.
-Support for downloading of zipped output files is to follow.
-
-The use case for myself was as a simple platform to allow running of routine data-processing and analysis scripts
-within a research group, but I'm sure there are other possibilities. However, I wouldn't recommend putting this
-on the public web just yet (pre-alpha warning). It's somewhat comparable to things like Shiny for R, except multi-user
-out of the box. Support for multiple command-line formats is on my todo.
-
-The interface is built on Foundation from Zurb, giving a responsive interface that works great on mobile devices:
-
-![Mobile config view](mobile-view-config.png)
 
 
 Enjoy and please fork.
@@ -51,21 +28,12 @@ Each script has it's own UI form based on the config parameters defined in the A
 Documentation can be specified either manually via the JSON, or my providing a
 [Markdown](http://en.wikipedia.org/wiki/Markdown)-format file alongside the script or config file.
 
-![plot_some_numbers script with docs](plot_some_numbers_with_documentation.png)
 
 Logged-in users get a nice listing of their previous jobs:
 
 ![User job listing](user_job_list.png)
 
 The output from successful jobs is available via an inline viewer (images only presently, .csv support via Pandas to follow):
-
-![Job with success 1](job_success_1.png)
-![Job with success 2](job_success_2.png)
-
-Errors are output to the inline console:
-
-![Job with error console](job_with_error.png)
-
 
 
 ## Quickstart
@@ -169,5 +137,3 @@ shell-interpretation risks.
 
 That said, if you script does something incredibly silly, like taking unchecked text input and using it
 as a path, you're probably going to regret it.
-
-

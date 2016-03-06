@@ -1,25 +1,25 @@
 
-
 <div>
-
   <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
+  <ul id="content-tabs" class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#run" aria-controls="run" role="tab" data-toggle="tab">Run Job</a></li>
     <li role="presentation"><a href="#how" aria-controls="how" role="tab" data-toggle="tab">HowTo</a></li>
     {% if job %}
-    <li role="presentation"><a href="#console" aria-controls="console" role="tab" data-toggle="tab">Running Status</a></li>
+    <li role="presentation"><a href="#console" aria-controls="console" role="tab" data-toggle="tab">Console</a></li>
+    {% endif %}
+    {% if job and job.has_output%}
+    <li role="presentation"><a href="#output" aria-controls="output" role="tab" data-toggle="tab">Output</a></li>
     {% endif %}
   </ul>
 <br><br>
   <!-- Tab panes -->
-  <div class="tab-content">
+<div id="tab-content" class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="run">
         <div>
-<div class="panel panel-default ">
-
-    <div class="panel-heading">
-        <h3 class="panel-title">Job Options</h3>
-    </div>
+            <div class="panel panel-default ">
+            <div class="panel-heading">
+                <h3 class="panel-title">Job Options</h3>
+            </div>
 
             <form method="post" enctype="multipart/form-data" action="{{ url_for('public.create_job', script_id=script.id) }}" class="full-height">
 
@@ -128,10 +128,16 @@
 
         {% else %}
             <p>There is no job running</p>
-        {% endif %}
-
+    {% endif %}
     </div>
-  </div>
+
+    {% if job and job.has_output%}
+    <div role="tabpanel" class="tab-pane" id="output">
+        {% for section, oo in display.items() %}
+            {% include "public/job_content.html" %}
+        {% endfor %}
+    </div>
+    {% endif %}
 
 </div>
 

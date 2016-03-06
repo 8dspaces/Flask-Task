@@ -9,11 +9,14 @@
 {% block js %}
 <script type=text/javascript>
 {% if job and not job.stopped_at %}
+
 $(document).ready(function () {
+
     status_check_interval = setInterval(
-        function() {
+          function(){
           $.getJSON("{{ url_for('public.job_json', job_id=job.id) }}", {
           }, function(data) {
+            console.log("what if");
             $("#status").attr('class', 'status status-' + data.status);
             $("#console-body").text(data.console);
 
@@ -25,17 +28,24 @@ $(document).ready(function () {
                 a = $("#section-"+d+"-a")
 
                 if(a.length){ // Exists, replace content
-                    a.html(d+' <span class="label round">'+data.display[d].count+' </span>')
-                    s = $("#section-"+d)
-                    var is_active = s.hasClass('active')
-                    s.replaceWith(data.display[d].content)
-                    if (is_active){
-                        $("#section-"+d).addClass('active')
+                        console.log("what if");
+                        a.html(d+' <span class="label round">'+data.display[d].count+' </span>')
+                        s = $("#section-"+d)
+                        var is_active = s.hasClass('active')
+                        s.replaceWith(data.display[d].content)
+                        if (is_active){
+                            $("#section-"+d).addClass('active')
                         }
 
-                } else { // Doesn't exist, create
-                    $("#content-tabs").append('<li id="section-'+d+'-tab" class="tab-title content-tab" role="presentational" ><a id="section-'+d+'-a" href="#section-'+d+'" role="tab" tabindex="0" aria-selected="" controls="section-'+d+'">'+d+' <span class="label round">'+data.display[d].count+' </span></a></li>')
-                    $('#content-content').append(data.display[d].content)
+                // } else { // Doesn't exist, create
+                //     $("#content-tabs").append(
+                //         '<li id="section-'+d+'-tab" class="tab-title content-tab" role="presentational" ><a id="section-'+d+'-a" href="#section-'+d+'" role="tab" tabindex="0" aria-selected="" controls="section-'+d+'">'+d+' <span class="label round">'+data.display[d].count+' </span></a></li>')
+                //     $('#tab-content').append(data.display[d].content)
+                // }
+                 } else { // Doesn't exist, create
+                            //$("#content-tabs").append('<li id="section-'+d+'-tab" class="tab-title content-tab" role="presentational" ><a id="section-'+d+'-a" href="#section-'+d+'" role="tab" tabindex="0" aria-selected="" controls="section-'+d+'">'+d+' <span class="label round">'+data.display[d].count+' </span></a></li>')
+                            console.log("ahahahs")
+                 $('#output').append(data.display[d].content)
                 }
             }
 
@@ -48,6 +58,7 @@ $(document).ready(function () {
           return false;
         }
     , 2500);
+
 });
 {% endif %}
 </script>
@@ -78,6 +89,17 @@ $(document).ready(function () {
     </div>
 {% endif %}
 
+{% if job %}
+<div id="download-button" class="large-3 columns download-button {% if job.has_output %}download-true{% else %}download-false{% endif %}">
+        <span class="download-yes-button">
+        <a href="{{ url_for('public.download_job_output', job_id=job.id, format='.zip') }}" class="button small split right radius"><i class="fa fa-download"></i> Download <span data-dropdown="drop"></span></a>
+        <ul id="drop" class="f-dropdown" data-dropdown-content>
+            <li><a href="{{ url_for('public.download_job_output', job_id=job.id, format='.zip') }}"><i class="fa fa-download"></i> .zip</a></li>
+        </ul>
+        </span>
+        <span class="download-no-button button small right secondary disabled radius"><i class="fa fa-warning"></i> No download</span>
+</div>
+{% endif %}
 {% endblock %}
 
 <!-- {% if job %}
@@ -162,7 +184,7 @@ $(document).ready(function () {
         </section>
 
         {% for section, oo in display.items() %}
-            {% include "public/job_content.html" %}
+            {---% include "public/job_content.html" %---}
         {% endfor %}
 
     {% endif %}

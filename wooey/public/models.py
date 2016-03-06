@@ -138,6 +138,7 @@ class Job(SurrogatePK, Model):
 
     def get_output_files(self):
         cwd = os.path.join(self.path, 'output')
+        files = ''
         if os.path.isdir(cwd):  # Execution has begun/finished
             # Filter files for files and not excluded above list
             # FIXME: The exclude list should come from config
@@ -150,5 +151,3 @@ class Job(SurrogatePK, Model):
     @property
     def has_output(self):
         return self.stopped_at is not None and len(self.get_output_files()) > 0
-
-
