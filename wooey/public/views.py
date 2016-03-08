@@ -176,8 +176,8 @@ def build_display_objects(files):
         name, ext = os.path.splitext(os.path.basename(filename))
 
         if ext in ['.png', '.jpg', '.jpeg', '.tif', '.tiff']:
-            with open(filename, 'r') as f:
-                src = '<img src="data:image/' + ext + ';base64,' + base64.b64encode(f.read()) + '">'
+            with open(filename, 'rb') as f:
+                src = '<img src="data:image/' + ext + ';base64,' + base64.b64encode(f.read()).decode('utf-8') + '">'
                 size = f.tell()
 
             display['Images'].append({

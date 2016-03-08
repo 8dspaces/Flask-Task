@@ -161,7 +161,7 @@ def start_daemon():
 
             # Check each vs. running subprocesses to see if still active (if not, update database with new status)
             # for k, v in pids.items():
-            for k, v in pids:  # fix issue in PY3
+            for k, v in list(pids.items()):  # fix issue in PY3
                 # Check process status and flush to file
                 v['process'].poll()
 
@@ -274,7 +274,7 @@ def start_daemon():
     db.session.commit()
 
     # Check each vs. running subprocesses to see if still active (if not, update database with new status)
-    for k, v in pids.items():
+    for k, v in list(pids.items()):
         v['process'].kill()  # Kill the running process
         v['out'].close()  # Close the output file
         del pids[k]  # Delete the object
